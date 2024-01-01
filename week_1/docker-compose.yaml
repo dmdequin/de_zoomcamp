@@ -1,14 +1,14 @@
 services:
   pgdatabase:
-    image: postgres:13
+    image: postgres:latest
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=ny_taxi
     volumes:
-      - "./ny_taxi_postgres_data:/var/lib/postgresql/data"
+      - 'ny_taxi_postgres_data:/var/lib/postgresql/data'
     ports:
-      - "5431:5432"
+      - '5431:5432'
     networks:
       - pg-network
   pgadmin:
@@ -20,13 +20,10 @@ services:
       - "8080:80"
     networks:
       - pg-network
-    volumes:
-      - type: volume
-        source: pgadmin_data
-        target: /var/lib/pgadmin
+
+volumes:
+  ny_taxi_postgres_data:
 
 networks:
   pg-network:
-
-volumes:
-  pgadmin_data:
+    driver: bridge
