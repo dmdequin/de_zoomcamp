@@ -28,19 +28,19 @@ def main(params):
     os.system(f"wget {url} -O {csv_name}")
 
     # Create a python engine for SQL
-    engine = create_engine(f"postgresql://{user}:{password}@{host}:{port}/{db}")
+    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
     # Create iterator
     df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
 
-    df = next(iter)
+    df = next(df_iter)
 
     # Make datatype corrections
-    df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
-    df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
+    df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+    df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
     # Add column names to database
-    df.head(n=0).to_sql(name=table_name, con=engine, if_exists="replace")
+    df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
     df.to_sql(name=table_name, con=engine, if_exists="append")
 
     # ## Add data to the db
@@ -52,8 +52,8 @@ def main(params):
             df = next(df_iter)
 
             # Make datatype corrections
-            df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
-            df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
+            df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+            df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
 
             # Append chunk to db
             df.to_sql(name=table_name, con=engine, if_exists="append")
@@ -67,13 +67,13 @@ def main(params):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Ingest CSV data to Postgres')
 
-    parser.add_argument('--user', 'user name for postgres')
-    parser.add_argument('--pass', 'passsword for postgres')
-    parser.add_argument('--host', 'host name for postgres')
-    parser.add_argument('--port', 'port for postgres')
-    parser.add_argument('--db', 'database name for postgres')
-    parser.add_argument('--table_name', 'table of the table where we will write results to')
-    parser.add_argument('--url', 'url of the cvs file')
+    parser.add_argument('--user', required=True, help='user name for postgres')
+    parser.add_argument('--password', required=True, help='password for postgres')
+    parser.add_argument('--host', required=True, help='host for postgres')
+    parser.add_argument('--port', required=True, help='port for postgres')
+    parser.add_argument('--db', required=True, help='database name for postgres')
+    parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
+    parser.add_argument('--url', required=True, help='url of the csv file')
 
     args = parser.parse_args()
 
