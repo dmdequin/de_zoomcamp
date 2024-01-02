@@ -17,12 +17,15 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
-      - "8080:80"
+      - '8080:80'
     networks:
       - pg-network
+    volumes:
+      - 'pgadmin:/var/lib/pgadmin'
 
 volumes:
   ny_taxi_postgres_data:
+  pgadmin:
 
 networks:
   pg-network:
