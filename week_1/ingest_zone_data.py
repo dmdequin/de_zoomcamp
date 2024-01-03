@@ -12,7 +12,7 @@ def main(params):
     db = params.db
     table_name = params.table_name
 
-    df_zones = pd.read_csv("taxi_zone_lookup.csv")
+    df_zones = pd.read_csv("data/taxi_zone_lookup.csv")
     df_zones.head(2)
 
     # Creaat engine

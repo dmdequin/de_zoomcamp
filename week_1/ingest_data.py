@@ -60,6 +60,7 @@ def main(params):
 
             t_end = time()
             print("inserted another chunk...took %.3f seconds" % (t_end - t_start))
+
         except StopIteration:
             print("end of file has been reached, all data is loaded...")
             break
