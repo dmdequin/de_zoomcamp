@@ -1,7 +1,6 @@
 # de_zoomcamp
 Data Engineering Zoomcamp course assignments and notes.
 
-# Data Engineering Zoomcamp
 This repo contains all of my notes and homework assignments for the Data Enginnering [Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) 2024 by [DataTalksClub](https://github.com/DataTalksClub).
  
 # Repo Structure
