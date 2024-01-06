@@ -6,7 +6,7 @@ __pycache__/
 
 # credential files
 *.env
-*df.json
+my_creds.json
 
 # terraform
 *.tfstate
