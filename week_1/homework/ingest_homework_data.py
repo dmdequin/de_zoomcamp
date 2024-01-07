@@ -30,9 +30,8 @@ def main(params):
     csv_zones = 'zones.csv'
 
     # download the data
-    os.system(f"wget -P data {url_trips} -O {csv_trips}")
-    os.system(f"wget -P data {url_zones} -O {csv_zones}")
-
+    os.system(f"wget {url_trips} -O {csv_trips}")
+    os.system(f"wget {url_zones} -O {csv_zones}")
 
     # Create a python engine for SQL
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
@@ -40,13 +39,13 @@ def main(params):
     # upload trips data to SQL
 
     # Create iterator
-    df_iter = pd.read_csv(f"data/{csv_trips}", iterator=True, chunksize=100000)
+    df_iter = pd.read_csv(f"{csv_trips}", iterator=True, chunksize=100000)
 
     df = next(df_iter)
 
     # Make datatype corrections
-    df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-    df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+    df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+    df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
 
     # Add column names to database
     df.head(n=0).to_sql(name=table_name_trips, con=engine, if_exists='replace')
@@ -63,8 +62,8 @@ def main(params):
             df = next(df_iter)
 
             # Make datatype corrections
-            df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-            df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+            df.lpep_pickup_datetime = pd.to_datetime(df.lpep_pickup_datetime)
+            df.lpep_dropoff_datetime = pd.to_datetime(df.lpep_dropoff_datetime)
 
             # Append chunk to db
             df.to_sql(name=table_name_trips, con=engine, if_exists="append")
@@ -79,7 +78,7 @@ def main(params):
     # upload zones data to postgres
     print("Uploading zones data to database...")
 
-    df_zones = pd.read_csv(f"data/{csv_zones}")
+    df_zones = pd.read_csv(f"{csv_zones}")
     df_zones.to_sql(name=table_name_zones, con=engine, if_exists="replace")
 
     print("--- Zone data has been added to the database ---")

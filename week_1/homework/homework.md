@@ -59,6 +59,32 @@ You will also need the dataset with zones:
 Download this data and put it into Postgres (with jupyter notebooks or with a pipeline)
 
 
+**SOLUTION**
+```bash
+# run pgadmin and postgres with docker compose
+
+URL_TRIPS="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"
+URL_ZONES="https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv"
+
+# Build the container using the Dockerfile
+docker build -t data_ingest:v001 .
+
+# Run the container
+docker run -it \
+  --network=homework_pg-network \
+  data_ingest:v001 \
+    --user=root \
+    --password=root \
+    --host=pgdatabase \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name_trips=green_taxi_trips  \
+    --table_name_zones=zone_data \
+    --url_trips=${URL_TRIPS} \
+    --url_zones=${URL_ZONES}
+```
+
+
 ## Question 3. Count records
 
 How many taxi trips were totally made on September 18th 2019?
@@ -71,6 +97,8 @@ Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in 
 - 15612
 - 15859
 - 89009
+
+**SOLUTION:**
 
 ## Question 4. Largest trip for each day
 
