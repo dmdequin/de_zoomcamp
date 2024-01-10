@@ -129,8 +129,20 @@ Use the pick up time for your calculations.
 
 - 2019-09-18
 - 2019-09-16
-- 2019-09-26
+- 2019-09-26 - yep
 - 2019-09-21
+
+**SOLUTION:**
+2019-09-26
+
+```sql
+SELECT
+	trip_distance, lpep_pickup_datetime
+FROM
+	green_taxi_trips
+ORDER BY
+	trip_distance DESC;
+```
 
 
 ## Question 5. The number of passengers
