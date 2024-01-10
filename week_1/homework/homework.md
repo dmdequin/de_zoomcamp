@@ -62,6 +62,7 @@ Download this data and put it into Postgres (with jupyter notebooks or with a pi
 **SOLUTION**
 ```bash
 # run pgadmin and postgres with docker compose
+docker compose up
 
 URL_TRIPS="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz"
 URL_ZONES="https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv"
@@ -93,12 +94,33 @@ Tip: started and finished on 2019-09-18.
 
 Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in the format timestamp (date and hour+min+sec) and not in date.
 
-- 15767
-- 15612
+- 15767 - no, this is just the count of pickups that day
+- 15612 - yep
 - 15859
-- 89009
+- 89009 - way too high
 
 **SOLUTION:**
+15612
+```sql
+SELECT COUNT(*) FROM
+	(
+	SELECT gt.pickup, gt.dropoff
+	FROM
+	(
+		SELECT
+			CAST(lpep_pickup_datetime AS DATE) as "pickup",
+			CAST(lpep_dropoff_datetime AS DATE) as "dropoff"
+		FROM
+			green_taxi_trips
+	) as gt
+	WHERE
+		( gt.pickup = CAST('2019-09-18' as DATE))
+	AND
+		( gt.dropoff = CAST('2019-09-18' as DATE))
+	ORDER BY gt.pickup ASC
+) as FOO;
+```
+
 
 ## Question 4. Largest trip for each day
 
