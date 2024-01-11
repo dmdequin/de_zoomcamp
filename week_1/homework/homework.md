@@ -198,6 +198,22 @@ Note: it's not a typo, it's `tip` , not `trip`
 
 **SOLUTION:**
 
+started writing the query
+```sql
+SELECT
+	lpep_pickup_datetime,
+	tip_amount,
+	zpu."Zone" as pickup_zone,
+	zdo."Zone" as "drop_off_zone"
+FROM
+	green_taxi_trips g
+LEFT JOIN zone_data zpu
+	ON g."PULocationID" = zpu."LocationID"
+LEFT JOIN zone_data zdo
+	ON g."DOLocationID" = zdo."LocationID"
+LIMIT 10;
+```
+
 ## Terraform
 
 In this section homework we'll prepare the environment by creating resources in GCP with Terraform.
