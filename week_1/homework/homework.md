@@ -156,6 +156,33 @@ Which were the 3 pick up Boroughs that had a sum of total_amount superior to 500
 - "Bronx" "Manhattan" "Queens"
 - "Brooklyn" "Queens" "Staten Island"
 
+**SOLUTION:** "Brooklyn" "Manhattan" "Queens"
+
+```sql
+SELECT
+	ROUND(CAST(SUM(g.total_amount) AS numeric),1) AS total,
+	zpu."Borough" as "pick_up_loc"
+FROM
+	(
+		SELECT
+			*
+		FROM
+		(
+			SELECT
+				CAST(lpep_pickup_datetime AS DATE) AS pickup,
+				total_amount,
+				"PULocationID"
+			FROM
+				green_taxi_trips
+		) as boo
+		WHERE
+			boo.pickup = CAST('2019-09-18' as DATE)
+	) as g
+LEFT JOIN zone_data zpu
+	ON g."PULocationID" = zpu."LocationID"
+GROUP BY pick_up_loc
+ORDER BY total DESC;
+```
 
 ## Question 6. Largest tip
 
@@ -169,7 +196,7 @@ Note: it's not a typo, it's `tip` , not `trip`
 - JFK Airport
 - Long Island City/Queens Plaza
 
-
+**SOLUTION:**
 
 ## Terraform
 
