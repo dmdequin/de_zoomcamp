@@ -197,21 +197,33 @@ Note: it's not a typo, it's `tip` , not `trip`
 - Long Island City/Queens Plaza
 
 **SOLUTION:**
+JFK Airport at 62.31
 
 started writing the query
 ```sql
 SELECT
-	lpep_pickup_datetime,
 	tip_amount,
-	zpu."Zone" as pickup_zone,
-	zdo."Zone" as "drop_off_zone"
+	drop_off_zone
 FROM
-	green_taxi_trips g
-LEFT JOIN zone_data zpu
-	ON g."PULocationID" = zpu."LocationID"
-LEFT JOIN zone_data zdo
-	ON g."DOLocationID" = zdo."LocationID"
-LIMIT 10;
+(
+	SELECT
+		tip_amount,
+		zpu."Zone" as "pick_up_zone",
+		zdo."Zone" as "drop_off_zone"
+	FROM
+		green_taxi_trips g
+	LEFT JOIN zone_data zpu
+		ON g."PULocationID" = zpu."LocationID"
+	LEFT JOIN zone_data zdo
+		ON g."DOLocationID" = zdo."LocationID"
+	WHERE
+		extract (month from lpep_pickup_datetime)=9
+	AND
+		extract (year from lpep_pickup_datetime)=2019
+) d
+WHERE
+	d.pick_up_zone='Astoria'
+ORDER BY d.tip_amount DESC;
 ```
 
 ## Terraform
