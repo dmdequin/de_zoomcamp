@@ -312,13 +312,8 @@ Do you want to perform these actions?
   Terraform will perform the actions described above.
   Only 'yes' will be accepted to approve.
 
-  Enter a value: 
+  Enter a value:
 ```
 
-
-## Submitting the solutions
-
-* Form for submitting:
-* You can submit your homework multiple times. In this case, only the last submission will be used.
-
-Deadline:
+Link for learning in public:
+[link](https://www.linkedin.com/posts/danielle-dequin_dezoomcamp-dataengineering-activity-7155227011601293312-Eh25?utm_source=share&utm_medium=member_desktop)
