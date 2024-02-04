@@ -18,3 +18,12 @@ Check process listening to a port
 
 Kill the process
 ```sudo kill <process ID>```
+
+```python
+# standardize columns
+data.columns = (
+        data.columns
+        .str.replace(' ', '_')
+        .str.lower()
+    )
+```
