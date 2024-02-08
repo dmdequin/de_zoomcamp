@@ -259,4 +259,4 @@ Once exported, how many partitions (folders) are present in Google Cloud?
 * Form for submitting: [here](https://courses.datatalks.club/de-zoomcamp-2024/homework/hw2)
 * Check the link above to see the due date
 
-Link for learning in [public]().
+Link for learning in [public](https://www.linkedin.com/posts/danielle-dequin_github-datatalksclubdata-engineering-zoomcamp-activity-7161451371030941697-HErl?utm_source=share&utm_medium=member_desktop).
