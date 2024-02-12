@@ -78,5 +78,5 @@ No Points: Write a `SELECT count(*)` query FROM the materialized table you creat
 
 * Form for submitting: https://courses.datatalks.club/de-zoomcamp-2024/homework/hw3
 
-Link to my GitHub Repository [here]().<br>
+Link to my GitHub Repository [here](https://github.com/dmdequin/de_zoomcamp/tree/main/week_3).<br>
 Link to my learning in public post [here]().
