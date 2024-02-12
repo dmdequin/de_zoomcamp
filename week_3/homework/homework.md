@@ -1,8 +1,9 @@
 ## Week 3 Homework
 
-2022 Green Taxi Trip Record Parquet Files from the NYC Taxi Data [here](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).<br>
-If using orchestration such as Mage do not load the data into Big Query using the orchestrator.</br>
-Stop with loading the files into a bucket. </br>
+2022 NYC Green Taxi Trip Data [here](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).<br>
+If using Mage do not load the data into Big Query using the orchestrator.</br>
+- Create data loader to get Green Taxi Trip Data.<br>
+- Upload data to GCS.<br>
 <u>NOTE:</u> Use the PARQUET option files when creating an External Table</br>
 
 <b>SETUP:</b></br>
